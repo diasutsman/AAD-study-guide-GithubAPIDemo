@@ -3,10 +3,9 @@ package com.dias.githubapidemo.ui.detailuser
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ConcatAdapter
 import com.dias.githubapidemo.databinding.ActivityDetailUserBinding
 import com.dias.githubapidemo.ui.RepoAdapter
-import com.dias.githubapidemo.ui.UserAdapter
-import com.dias.githubapidemo.views.UserHeader
 
 class UserDetailActivity : AppCompatActivity() {
 
@@ -33,7 +32,7 @@ class UserDetailActivity : AppCompatActivity() {
             getUserDetail(username)
             getUserRepos(username)
             user.observe(this@UserDetailActivity) {
-                binding.rvRepos.addItemDecoration(UserHeader(it))
+                binding.rvRepos.adapter = ConcatAdapter(UserHeaderAdapter(it), mAdapter)
 //                binding.apply {
 //                    user = it
 //                    tvBio.text =
