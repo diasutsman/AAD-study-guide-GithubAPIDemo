@@ -10,6 +10,8 @@
         android:id="@+id/rv_list_user"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/row_item_user"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

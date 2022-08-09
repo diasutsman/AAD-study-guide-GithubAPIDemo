@@ -3,8 +3,11 @@ package com.dias.githubapidemo.ui.listuser
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.dias.githubapidemo.databinding.ActivityListUserBinding
 import com.dias.githubapidemo.ui.UserAdapter
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class ListUserActivity : AppCompatActivity() {
 
@@ -21,9 +24,8 @@ class ListUserActivity : AppCompatActivity() {
         val viewModel = ViewModelProvider(this)[ListUserViewModel::class.java]
         val adapter = UserAdapter()
         binding.rvListUser.adapter = adapter
-        viewModel.getUsersList()
-        viewModel.listUser.observe(this) {
-            adapter.submitList(it)
+        lifecycleScope.launch {
+            viewModel.listUser.collectLatest(adapter::submitData)
         }
     }
 

@@ -33,9 +33,9 @@ class SearchUserActivity : AppCompatActivity() {
             }
 
         })
-        viewModel.listUser.observe(this) {
-            adapter.submitList(it)
-        }
+//        viewModel.listUser.observe(this) {
+//            adapter.submitList(it)
+//        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

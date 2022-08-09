@@ -1,17 +1,16 @@
 package com.dias.githubapidemo.ui
 
 import android.content.Intent
-import android.content.Intent.EXTRA_USER
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.dias.githubapidemo.data.User
 import com.dias.githubapidemo.databinding.RowItemUserBinding
 import com.dias.githubapidemo.ui.detailuser.UserDetailActivity
 
-class UserAdapter : ListAdapter<User, UserAdapter.UserViewHolder>(DIFF_CALLBACK) {
+class UserAdapter : PagingDataAdapter<User, UserAdapter.UserViewHolder>(DIFF_CALLBACK) {
     class UserViewHolder(val binding: RowItemUserBinding) :
         RecyclerView.ViewHolder(binding.root)
 
@@ -27,7 +26,7 @@ class UserAdapter : ListAdapter<User, UserAdapter.UserViewHolder>(DIFF_CALLBACK)
             val context = root.context
             root.setOnClickListener {
                 context.startActivity(Intent(context, UserDetailActivity::class.java).putExtra(
-                    UserDetailActivity.USER_NAME, user.login))
+                    UserDetailActivity.USER_NAME, user?.login))
             }
         }
     }

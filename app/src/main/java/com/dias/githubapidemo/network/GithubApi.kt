@@ -17,7 +17,10 @@ import java.util.concurrent.TimeUnit
 
 interface GithubApi {
     @GET("users")
-    fun getUsers(): Call<List<User>>
+    suspend fun getUsers(
+        @Query("since") since: Int,
+        @Query("per_page") perPage: Int
+    ): List<User>
 
     @GET("search/users")
     fun searchUsers(
@@ -54,7 +57,7 @@ interface GithubApi {
                     val request = chain.request()
                         .newBuilder()
                         .addHeader("Content-Type", "application/json")
-//                        .addHeader("Authorization", "token ${BuildConfig.GITHUB_TOKEN}")
+//                        .addHeader("Authorization", "")
                         .build()
                     return@addInterceptor chain.proceed(request)
                 }
