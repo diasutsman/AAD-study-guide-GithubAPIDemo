@@ -54,7 +54,6 @@ interface GithubApi {
                     val request = chain.request()
                         .newBuilder()
                         .addHeader("Content-Type", "application/json")
-                        .addHeader("Authorization", "token ${BuildConfig.GITHUB_TOKEN}")
                         .build()
                     return@addInterceptor chain.proceed(request)
                 }
