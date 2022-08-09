@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/programming/learn/aad-study-guide/idn/GithubAPIDemo/app/src/main/res/drawable/ic_git_branch.xml" value="0.111" />
+        <entry key="..\:/programming/learn/aad-study-guide/idn/GithubAPIDemo/app/src/main/res/layout/activity_detail.xml" value="0.13333333333333333" />
+        <entry key="..\:/programming/learn/aad-study-guide/idn/GithubAPIDemo/app/src/main/res/layout/activity_list_user.xml" value="0.20167564332734889" />
+        <entry key="..\:/programming/learn/aad-study-guide/idn/GithubAPIDemo/app/src/main/res/layout/activity_main.xml" value="0.17552083333333332" />
+        <entry key="..\:/programming/learn/aad-study-guide/idn/GithubAPIDemo/app/src/main/res/layout/activity_search_repo.xml" value="0.22" />
+        <entry key="..\:/programming/learn/aad-study-guide/idn/GithubAPIDemo/app/src/main/res/layout/activity_search_user.xml" value="0.12182971014492754" />
+        <entry key="..\:/programming/learn/aad-study-guide/idn/GithubAPIDemo/app/src/main/res/layout/row_item_repo.xml" value="0.15534420289855072" />
+        <entry key="..\:/programming/learn/aad-study-guide/idn/GithubAPIDemo/app/src/main/res/layout/row_item_user.xml" value="0.3333333333333333" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
