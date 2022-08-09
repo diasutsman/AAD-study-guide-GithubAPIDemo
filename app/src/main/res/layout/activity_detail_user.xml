@@ -1,144 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.detailuser.UserDetailActivity">
 
-    <data>
-
-        <variable
-            name="user"
-            type="com.dias.githubapidemo.data.User" />
-    </data>
-
-    <androidx.core.widget.NestedScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_repos"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.detailuser.UserDetailActivity">
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/iv_user_image"
-                imageUrl="@{user.avatarUrl}"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/avatars" />
-
-            <LinearLayout
-                android:id="@+id/ll_repo_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="@+id/iv_user_image"
-                app:layout_constraintEnd_toStartOf="@+id/ll_followers_count"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/iv_user_image"
-                app:layout_constraintTop_toTopOf="@+id/iv_user_image">
-
-                <TextView
-                    android:id="@+id/tv_repo_count"
-                    style="@style/count_style"
-                    android:text="@{user.publicRepos.toString()}"
-                    tools:text="67" />
-
-                <TextView
-                    android:id="@+id/tv_repo_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txt_repositories" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_followers_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="@+id/ll_repo_count"
-                app:layout_constraintEnd_toStartOf="@+id/ll_following_count"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/ll_repo_count"
-                app:layout_constraintTop_toTopOf="@+id/ll_repo_count">
-
-                <TextView
-                    android:id="@+id/tv_followers_count"
-                    style="@style/count_style"
-                    android:text="@{user.followers.toString()}"
-                    tools:text="67" />
-
-                <TextView
-                    android:id="@+id/tv_followers_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txt_followers" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_following_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintBottom_toBottomOf="@+id/ll_followers_count"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/ll_followers_count"
-                app:layout_constraintTop_toTopOf="@+id/ll_followers_count">
-
-                <TextView
-                    android:id="@+id/tv_following_count"
-                    style="@style/count_style"
-                    android:text="@{user.following.toString()}"
-                    tools:text="67" />
-
-                <TextView
-                    android:id="@+id/tv_following_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txt_following" />
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/tv_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@{user.name}"
-                android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/iv_user_image"
-                app:layout_constraintTop_toBottomOf="@+id/iv_user_image"
-                tools:text="User Name" />
-
-            <TextView
-                android:id="@+id/tv_bio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-                app:layout_constraintStart_toStartOf="@id/tv_name"
-                app:layout_constraintTop_toBottomOf="@id/tv_name"
-                tools:text="This is user bio" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_repos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_bio" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>
