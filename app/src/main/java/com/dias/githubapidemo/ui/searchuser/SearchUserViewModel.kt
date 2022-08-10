@@ -22,19 +22,6 @@ class SearchUserViewModel : ViewModel() {
     val listUser get() = _listUser as LiveData<PagingData<User>>
 
     fun searchUser(query: String) {
-//        GithubApi.getGithubApi().searchUsers(nama).enqueue(object : Callback<SearchUserResponse> {
-//            override fun onResponse(
-//                call: Call<SearchUserResponse>,
-//                response: Response<SearchUserResponse>,
-//            ) {
-//                _listUser.value = response.body()?.items ?: listOf()
-//            }
-//
-//            override fun onFailure(call: Call<SearchUserResponse>, t: Throwable) {
-//                Log.e("SearchUserViewModel", t.message.toString())
-//            }
-//
-//        })
         viewModelScope.launch {
             Pager(
                 config = PagingConfig(

@@ -41,16 +41,6 @@ class UserDetailViewModel : ViewModel() {
     }
 
     fun getUserRepos(username: String) {
-//        GithubApi.getGithubApi().getUserRepos(username).enqueue(object : Callback<List<Repo>> {
-//            override fun onResponse(call: Call<List<Repo>>, response: Response<List<Repo>>) {
-//                if (response.isSuccessful) _repos.value = response.body()
-//            }
-//
-//            override fun onFailure(call: Call<List<Repo>>, t: Throwable) {
-//                Log.d("DetailViewModel", "onFailure: ${t.message}")
-//            }
-//
-//        })
         viewModelScope.launch {
             Pager(
                 config = PagingConfig(

@@ -35,18 +35,6 @@ class UserDetailActivity : AppCompatActivity() {
             getUserRepos(username)
             user.observe(this@UserDetailActivity) {
                 binding.rvRepos.adapter = ConcatAdapter(UserHeaderAdapter(it), mAdapter)
-//                binding.apply {
-//                    user = it
-//                    tvBio.text =
-//                        listOf(
-//                            it.company,
-//                            it.location,
-//                            it.email,
-//                            it.blog,
-//                            it.twitterUsername,
-//                            it.bio,
-//                        ).filter { str -> !str.isNullOrEmpty() }.joinToString("\n")
-//                }
                 title = it.login
             }
 

@@ -20,20 +20,6 @@ class SearchRepoViewModel : ViewModel() {
     val repoList : LiveData<PagingData<Repo>> get() = _repoList
 
     fun searchRepositories(query: String) {
-//        GithubApi.getGithubApi().searchRepositories(query).enqueue(object : Callback<SearchRepoResponse> {
-//            override fun onResponse(
-//                call: Call<SearchRepoResponse>,
-//                response: Response<SearchRepoResponse>,
-//            ) {
-//                  if (response.isSuccessful)
-//                     _repoList.value = response.body()?.items as List<Repo>
-//            }
-//
-//            override fun onFailure(call: Call<SearchRepoResponse>, t: Throwable) {
-//                Log.d("SearchRepoViewModel", "onFailure: $t")
-//            }
-//
-//        })
         viewModelScope.launch {
             Pager(
                 config = PagingConfig(
