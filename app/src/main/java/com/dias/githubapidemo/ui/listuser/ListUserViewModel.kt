@@ -7,8 +7,8 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.dias.githubapidemo.data.User
-import com.dias.githubapidemo.data.UserPagingSource
-import com.dias.githubapidemo.data.UserPagingSource.Companion.PAGE_SIZE
+import com.dias.githubapidemo.data.ListUserPagingSource
+import com.dias.githubapidemo.data.ListUserPagingSource.Companion.PAGE_SIZE
 import kotlinx.coroutines.flow.Flow
 
 class ListUserViewModel : ViewModel() {
@@ -46,6 +46,6 @@ class ListUserViewModel : ViewModel() {
             initialLoadSize = PAGE_SIZE,
             maxSize = PAGE_SIZE * 3
         ),
-        pagingSourceFactory = { UserPagingSource() }
+        pagingSourceFactory = { ListUserPagingSource() }
     ).flow.cachedIn(viewModelScope)
 }

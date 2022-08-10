@@ -1,37 +1,54 @@
 package com.dias.githubapidemo.ui.searchuser
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dias.githubapidemo.data.SearchUserResponse
+import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.dias.githubapidemo.data.User
-import com.dias.githubapidemo.network.GithubApi
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.dias.githubapidemo.data.ListUserPagingSource
+import com.dias.githubapidemo.data.SearchUserPagingSource
+import com.dias.githubapidemo.data.SearchUserPagingSource.Companion.PAGE_SIZE
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class SearchUserViewModel : ViewModel() {
 
     // listUser digunakna sebagai penampung data setelah diambil dari API
-    private val _listUser = MutableLiveData<List<User>>()
+    private val _listUser = MutableLiveData<PagingData<User>>()
 
     // getter listUser yang akan menyediakan data yang akan ditampilkan di UI
-    val listUser get() = _listUser as LiveData<List<User>>
+    val listUser get() = _listUser as LiveData<PagingData<User>>
 
-    fun searchUser(nama: String) {
-        GithubApi.getGithubApi().searchUsers(nama).enqueue(object : Callback<SearchUserResponse> {
-            override fun onResponse(
-                call: Call<SearchUserResponse>,
-                response: Response<SearchUserResponse>,
-            ) {
-                _listUser.value = response.body()?.items ?: listOf()
+    fun searchUser(query: String) {
+//        GithubApi.getGithubApi().searchUsers(nama).enqueue(object : Callback<SearchUserResponse> {
+//            override fun onResponse(
+//                call: Call<SearchUserResponse>,
+//                response: Response<SearchUserResponse>,
+//            ) {
+//                _listUser.value = response.body()?.items ?: listOf()
+//            }
+//
+//            override fun onFailure(call: Call<SearchUserResponse>, t: Throwable) {
+//                Log.e("SearchUserViewModel", t.message.toString())
+//            }
+//
+//        })
+        viewModelScope.launch {
+            Pager(
+                config = PagingConfig(
+                    pageSize = PAGE_SIZE,
+                    enablePlaceholders = false,
+                    initialLoadSize = PAGE_SIZE,
+                    maxSize = PAGE_SIZE * 3
+                ),
+                pagingSourceFactory = { SearchUserPagingSource(query) }
+            ).flow.cachedIn(viewModelScope).collectLatest {
+                _listUser.value = it
             }
-
-            override fun onFailure(call: Call<SearchUserResponse>, t: Throwable) {
-                Log.e("SearchUserViewModel", t.message.toString())
-            }
-
-        })
+        }
     }
 }

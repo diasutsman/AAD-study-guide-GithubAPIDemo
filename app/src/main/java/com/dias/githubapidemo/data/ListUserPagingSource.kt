@@ -6,15 +6,14 @@ import com.dias.githubapidemo.network.GithubApi
 import retrofit2.HttpException
 import java.io.IOException
 
-class UserPagingSource(private val query: String = "") : PagingSource<Int, User>() {
+class ListUserPagingSource : PagingSource<Int, User>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, User> {
         val since = params.key ?: STARTING_ID
-        val githubApi = GithubApi.getGithubApi()
-        val data = githubApi.getUsers(since,
-            params.loadSize)
+        val data = GithubApi.getGithubApi().getUsers(since, params.loadSize)
         val nextKey = if (data.isEmpty()) null else since + params.loadSize
         val prevKey = if (since == STARTING_ID) null else since - params.loadSize
+
         return try {
             LoadResult.Page(
                 data = data,

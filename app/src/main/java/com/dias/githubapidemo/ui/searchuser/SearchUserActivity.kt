@@ -4,8 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.dias.githubapidemo.databinding.ActivitySearchUserBinding
 import com.dias.githubapidemo.ui.UserAdapter
+import kotlinx.coroutines.launch
 
 class SearchUserActivity : AppCompatActivity() {
 
@@ -33,9 +35,11 @@ class SearchUserActivity : AppCompatActivity() {
             }
 
         })
-//        viewModel.listUser.observe(this) {
-//            adapter.submitList(it)
-//        }
+        viewModel.listUser.observe(this) {
+            lifecycleScope.launch {
+                adapter.submitData(it)
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
