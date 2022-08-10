@@ -3,9 +3,11 @@ package com.dias.githubapidemo.ui.detailuser
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import com.dias.githubapidemo.databinding.ActivityDetailUserBinding
 import com.dias.githubapidemo.ui.RepoAdapter
+import kotlinx.coroutines.launch
 
 class UserDetailActivity : AppCompatActivity() {
 
@@ -49,7 +51,9 @@ class UserDetailActivity : AppCompatActivity() {
             }
 
             repos.observe(this@UserDetailActivity) {
-                mAdapter.submitList(it)
+                lifecycleScope.launch {
+                    mAdapter.submitData(it)
+                }
             }
         }
     }

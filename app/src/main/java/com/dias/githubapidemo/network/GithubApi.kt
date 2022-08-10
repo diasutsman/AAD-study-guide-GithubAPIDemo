@@ -19,14 +19,14 @@ interface GithubApi {
     @GET("users")
     suspend fun getUsers(
         @Query("since") since: Int,
-        @Query("per_page") perPage: Int
+        @Query("per_page") perPage: Int,
     ): List<User>
 
     @GET("search/users")
     suspend fun searchUsers(
         @Query("q") query: String,
         @Query("page") page: Int,
-        @Query("per_page") perPage: Int
+        @Query("per_page") perPage: Int,
     ): SearchUserResponse
 
     @GET("users/{username}")
@@ -35,15 +35,20 @@ interface GithubApi {
     ): Call<User>
 
     @GET("users/{username}/repos")
-    fun getUserRepos(
+    suspend fun getUserRepos(
         @Path("username") username: String,
-    ): Call<List<Repo>>
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int,
+        @Query("sort") sort: String = "updated"
+    ): List<Repo>
 
     // repository
     @GET("search/repositories")
-    fun searchRepositories(
+    suspend fun searchRepositories(
         @Query("q") query: String,
-    ): Call<SearchRepoResponse>
+        @Query("page") page: Int,
+        @Query("per_page") perPage: Int,
+    ): SearchRepoResponse
 
     companion object {
         fun getGithubApi(): GithubApi {

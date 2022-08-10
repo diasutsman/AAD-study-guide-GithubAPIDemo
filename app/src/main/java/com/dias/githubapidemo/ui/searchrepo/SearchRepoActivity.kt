@@ -4,8 +4,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.dias.githubapidemo.databinding.ActivitySearchRepoBinding
 import com.dias.githubapidemo.ui.RepoAdapter
+import kotlinx.coroutines.launch
 
 class SearchRepoActivity : AppCompatActivity() {
 
@@ -36,7 +38,9 @@ class SearchRepoActivity : AppCompatActivity() {
         }
 
         viewModel.repoList.observe(this) {
-            adapter.submitList(it)
+            lifecycleScope.launch {
+                adapter.submitData(it)
+            }
         }
     }
 
