@@ -9,9 +9,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.dias.githubapidemo.data.User
-import com.dias.githubapidemo.data.ListUserPagingSource
-import com.dias.githubapidemo.data.SearchUserPagingSource
-import com.dias.githubapidemo.data.SearchUserPagingSource.Companion.PAGE_SIZE
+import com.dias.githubapidemo.data.UserPagingSource
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -40,12 +38,12 @@ class SearchUserViewModel : ViewModel() {
         viewModelScope.launch {
             Pager(
                 config = PagingConfig(
-                    pageSize = PAGE_SIZE,
+                    pageSize = UserPagingSource.PAGE_SIZE,
                     enablePlaceholders = false,
-                    initialLoadSize = PAGE_SIZE,
-                    maxSize = PAGE_SIZE * 3
+                    initialLoadSize = UserPagingSource.PAGE_SIZE,
+                    maxSize = UserPagingSource.PAGE_SIZE * 3
                 ),
-                pagingSourceFactory = { SearchUserPagingSource(query) }
+                pagingSourceFactory = { UserPagingSource(query) }
             ).flow.cachedIn(viewModelScope).collectLatest {
                 _listUser.value = it
             }
