@@ -6,35 +6,44 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.dias.githubapidemo.R
 import com.dias.githubapidemo.data.Repo
 import com.dias.githubapidemo.databinding.RowItemRepoBinding
 
 class RepoAdapter : PagingDataAdapter<Repo, RepoAdapter.RepoViewHolder>(DIFF_CALLBACK) {
-    class RepoViewHolder(val binding: RowItemRepoBinding) : RecyclerView.ViewHolder(binding.root)
+    class RepoViewHolder(
+        private val binding: RowItemRepoBinding,
+        private val onClickListener: (Repo) -> Unit,
+    ) : RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.root.setOnClickListener {
+                onClickListener(binding.repo as Repo)
+            }
+        }
+
+        fun bind(mRepo: Repo?) {
+            binding.apply {
+                repo = mRepo
+                repoLanguage.text = root.context.getString(R.string.language, mRepo?.language)
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         RepoViewHolder(
             RowItemRepoBinding.inflate(LayoutInflater.from(parent.context),
                 parent,
                 false)
-        )
+        ) { repo ->
+            val context = parent.context
+            context.startActivity(
+                Intent(Intent.ACTION_VIEW, Uri.parse(repo.htmlUrl))
+            )
+        }
 
     override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
-        holder.binding.apply {
-            val context = holder.itemView.context
-            repo = getItem(position)
-            repo?.language?.let {
-                repoLanguage.text = context.getString(R.string.language, repo?.language)
-            }
-            repoName.setOnClickListener {
-                context.startActivity(
-                    Intent(Intent.ACTION_VIEW, Uri.parse(repo?.htmlUrl))
-                )
-            }
-        }
+        holder.bind(getItem(position))
     }
 
     companion object {
