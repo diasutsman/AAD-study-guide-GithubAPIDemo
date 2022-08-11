@@ -18,19 +18,20 @@
         <activity
             android:name=".ui.detailuser.UserDetailActivity"
             android:exported="false"
-            android:label="@string/txt_user_detail"/>
+            android:label="@string/txt_user_detail"
+            android:theme="@style/Theme.GithubAPIDemo.DetailAppBar" />
         <activity
             android:name=".ui.searchrepo.SearchRepoActivity"
             android:exported="false"
-            android:label="@string/txt_search_repo"/>
+            android:label="@string/txt_search_repo" />
         <activity
             android:name=".ui.searchuser.SearchUserActivity"
             android:exported="false"
-            android:label="@string/txt_search_user"/>
+            android:label="@string/txt_search_user" />
         <activity
             android:name=".ui.listuser.ListUserActivity"
             android:exported="false"
-            android:label="@string/txt_list_of_user"/>
+            android:label="@string/txt_list_of_user" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
