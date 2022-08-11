@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_list"
+        android:icon="@drawable/ic_list"
+        android:title="@string/txt_list_of_user"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_search_repo"
+        android:icon="@drawable/ic_search_repo"
+        android:title="@string/txt_search_repo"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_search_user"
+        android:icon="@drawable/ic_search_user"
+        android:title="@string/txt_search_user"
+        app:showAsAction="ifRoom" />
+</menu>
