@@ -11,7 +11,7 @@ import com.dias.githubapidemo.databinding.RowItemUserBinding
 import com.dias.githubapidemo.ui.detailuser.UserDetailActivity
 
 class UserAdapter : PagingDataAdapter<User, UserAdapter.UserViewHolder>(DIFF_CALLBACK) {
-    class UserViewHolder(private val binding: RowItemUserBinding, val onClickListener: (User) -> Unit) :
+    class UserViewHolder(private val binding: RowItemUserBinding,private val onClickListener: (User) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener {
