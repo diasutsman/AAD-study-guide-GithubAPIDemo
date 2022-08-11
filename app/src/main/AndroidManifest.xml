@@ -21,18 +21,6 @@
             android:label="@string/txt_user_detail"
             android:theme="@style/Theme.GithubAPIDemo.DetailAppBar" />
         <activity
-            android:name=".ui.searchrepo.SearchRepoActivity"
-            android:exported="false"
-            android:label="@string/txt_search_repo" />
-        <activity
-            android:name=".ui.searchuser.SearchUserActivity"
-            android:exported="false"
-            android:label="@string/txt_search_user" />
-        <activity
-            android:name=".ui.listuser.ListUserActivity"
-            android:exported="false"
-            android:label="@string/txt_list_of_user" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

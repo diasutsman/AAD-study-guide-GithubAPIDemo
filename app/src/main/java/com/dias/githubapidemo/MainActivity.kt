@@ -1,15 +1,15 @@
 package com.dias.githubapidemo
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.dias.githubapidemo.databinding.ActivityMainBinding
-import com.dias.githubapidemo.ui.listuser.ListUserActivity
-import com.dias.githubapidemo.ui.searchrepo.SearchRepoActivity
-import com.dias.githubapidemo.ui.searchuser.SearchUserActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity() {
 
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding as ActivityMainBinding
@@ -19,26 +19,22 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.apply {
-            btnRvListUser.setOnClickListener(this@MainActivity)
-            btnRvSearchRepo.setOnClickListener(this@MainActivity)
-            btnRvSearchUser.setOnClickListener(this@MainActivity)
-        }
+        setupBottomNavigationBar()
     }
 
-    override fun onClick(view: View?) {
-        view?.let {
-            when (it.id) {
-                R.id.btn_rv_list_user -> {
-                    startActivity(Intent(this, ListUserActivity::class.java))
-                }
-                R.id.btn_rv_search_repo -> {
-                    startActivity(Intent(this, SearchRepoActivity::class.java))
-                }
-                R.id.btn_rv_search_user -> {
-                    startActivity(Intent(this, SearchUserActivity::class.java))
-                }
-            }
-        }
+    private fun setupBottomNavigationBar() {
+        val navView: BottomNavigationView = binding.bottomNavigation
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_activity_main) as NavHostFragment
+        navView.setupWithNavController(navHostFragment.navController)
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.action_list,
+                R.id.action_search_repo,
+                R.id.action_search_user
+            )
+        )
+        setupActionBarWithNavController(navHostFragment.navController, appBarConfiguration)
     }
+
 }
