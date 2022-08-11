@@ -9,9 +9,5 @@
     <string name="txt_search_repo">Search Repository</string>
     <string name="txt_search_user">Search User</string>
     <string name="txt_list_of_user">List of User</string>
-
-    <string name="txt_bio">
-        %s\n%s\n%s
-    </string>
     <string name="txt_user_detail">User Detail</string>
 </resources>
