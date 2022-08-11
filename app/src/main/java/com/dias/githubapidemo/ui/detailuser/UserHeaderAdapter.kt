@@ -6,8 +6,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dias.githubapidemo.data.User
 import com.dias.githubapidemo.databinding.ContentUserDetailBinding
 
-class UserHeaderAdapter(private val user: User) :
+class UserHeaderAdapter(private var user: User) :
     RecyclerView.Adapter<UserHeaderAdapter.UserHeaderViewHolder>() {
+
+    private var _binding: ContentUserDetailBinding? = null
+    private val binding get() = _binding as ContentUserDetailBinding
+
     class UserHeaderViewHolder(val binding: ContentUserDetailBinding, user: User) :
         RecyclerView.ViewHolder(binding.root) {
         init {
@@ -15,10 +19,17 @@ class UserHeaderAdapter(private val user: User) :
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = UserHeaderViewHolder(
-        ContentUserDetailBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-        user
-    )
+    fun setUser(user: User) {
+        binding.user = user.copy(avatarUrl = null)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : UserHeaderViewHolder {
+        _binding = ContentUserDetailBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return UserHeaderViewHolder(
+            binding,
+            user
+        )
+    }
 
     override fun onBindViewHolder(holder: UserHeaderViewHolder, position: Int) {}
 

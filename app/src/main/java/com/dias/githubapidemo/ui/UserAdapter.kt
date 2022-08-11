@@ -26,7 +26,7 @@ class UserAdapter : PagingDataAdapter<User, UserAdapter.UserViewHolder>(DIFF_CAL
             val context = root.context
             root.setOnClickListener {
                 context.startActivity(Intent(context, UserDetailActivity::class.java).putExtra(
-                    UserDetailActivity.USER_NAME, user?.login))
+                    UserDetailActivity.USER_KEY, user as User))
             }
         }
     }

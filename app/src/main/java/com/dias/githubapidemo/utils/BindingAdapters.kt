@@ -10,9 +10,11 @@ object BindingAdapters {
     @JvmStatic
     @BindingAdapter("imageUrl")
     fun imageUrl(imageView: ImageView, url: String?) {
-        Glide.with(imageView)
-            .load(url)
-            .into(imageView)
+        url?.let {
+            Glide.with(imageView)
+                .load(url)
+                .into(imageView)
+        }
     }
 
     @JvmStatic
