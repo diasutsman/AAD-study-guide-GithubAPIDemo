@@ -1,12 +1,16 @@
 package com.dias.githubapidemo.data
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class SearchUserResponse(
     @field:SerializedName("items")
     val items: List<User>? = null,
 )
 
+
+@Parcelize
 data class User(
 
     @field:SerializedName("gists_url")
@@ -64,7 +68,7 @@ data class User(
     val organizationsUrl: String? = null,
 
     @field:SerializedName("hireable")
-    val hireable: Any? = null,
+    val hireable: Boolean? = null,
 
     @field:SerializedName("starred_url")
     val starredUrl: String? = null,
@@ -103,5 +107,5 @@ data class User(
     val location: String? = "",
 
     @field:SerializedName("node_id")
-    val nodeId: String? = null
-)
+    val nodeId: String? = null,
+) : Parcelable

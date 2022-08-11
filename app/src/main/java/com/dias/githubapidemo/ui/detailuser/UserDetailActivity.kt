@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
+import com.dias.githubapidemo.data.User
 import com.dias.githubapidemo.databinding.ActivityDetailUserBinding
 import com.dias.githubapidemo.ui.RepoAdapter
 import kotlinx.coroutines.launch
@@ -25,17 +26,19 @@ class UserDetailActivity : AppCompatActivity() {
 
         val viewModel = ViewModelProvider(this)[UserDetailViewModel::class.java]
         val mAdapter = RepoAdapter()
-        binding.rvRepos.apply {
-            adapter = mAdapter
+        val mUser = intent.extras?.getParcelable<User>(USER_KEY) as User
+        val mUserHeaderAdapter = UserHeaderAdapter(mUser)
+        title = mUser.login
+
+        binding.apply {
+            rvRepos.adapter = ConcatAdapter(mUserHeaderAdapter, mAdapter)
         }
 
         viewModel.apply {
-            val username = intent.getStringExtra(USER_NAME).toString()
-            getUserDetail(username)
-            getUserRepos(username)
+            getUserDetail(mUser.login.toString())
+            getUserRepos(mUser.login.toString())
             user.observe(this@UserDetailActivity) {
-                binding.rvRepos.adapter = ConcatAdapter(UserHeaderAdapter(it), mAdapter)
-                title = it.login
+                mUserHeaderAdapter.setUser(it)
             }
 
             repos.observe(this@UserDetailActivity) {
@@ -52,6 +55,6 @@ class UserDetailActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val USER_NAME = "USER_NAME"
+        const val USER_KEY = "user_key"
     }
 }
