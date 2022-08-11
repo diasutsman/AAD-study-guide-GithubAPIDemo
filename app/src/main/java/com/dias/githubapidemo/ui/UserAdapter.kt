@@ -11,24 +11,30 @@ import com.dias.githubapidemo.databinding.RowItemUserBinding
 import com.dias.githubapidemo.ui.detailuser.UserDetailActivity
 
 class UserAdapter : PagingDataAdapter<User, UserAdapter.UserViewHolder>(DIFF_CALLBACK) {
-    class UserViewHolder(val binding: RowItemUserBinding) :
-        RecyclerView.ViewHolder(binding.root)
+    class UserViewHolder(private val binding: RowItemUserBinding, val onClickListener: (User) -> Unit) :
+        RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.root.setOnClickListener {
+                onClickListener(binding.user as User)
+            }
+        }
+        fun bind(user: User?) {
+            binding.user = user
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         UserViewHolder(RowItemUserBinding.inflate(
             LayoutInflater.from(parent.context), parent, false)
-        )
+        ){
+            val context = parent.context
+            context.startActivity(Intent(context, UserDetailActivity::class.java).putExtra(
+                UserDetailActivity.USER_KEY, it))
+        }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val user = getItem(position)
-        holder.binding.apply {
-            this.user = user
-            val context = root.context
-            root.setOnClickListener {
-                context.startActivity(Intent(context, UserDetailActivity::class.java).putExtra(
-                    UserDetailActivity.USER_KEY, user as User))
-            }
-        }
+        holder.bind(user)
     }
 
     companion object {
