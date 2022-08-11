@@ -23,10 +23,7 @@ class RepoAdapter : PagingDataAdapter<Repo, RepoAdapter.RepoViewHolder>(DIFF_CAL
         }
 
         fun bind(mRepo: Repo?) {
-            binding.apply {
-                repo = mRepo
-                repoLanguage.text = root.context.getString(R.string.language, mRepo?.language)
-            }
+            binding.repo = mRepo
         }
     }
 

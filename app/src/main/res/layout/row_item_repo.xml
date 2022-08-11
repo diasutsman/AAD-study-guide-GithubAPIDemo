@@ -50,6 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
             android:paddingVertical="@dimen/row_item_margin_vertical"
+            android:text='@{repo.language != null? @string/language(repo.language) : ""}'
             android:textSize="@dimen/repo_description_size"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/repo_description"
@@ -60,6 +61,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginVertical="@dimen/row_item_margin_vertical"
+            android:importantForAccessibility="no"
             android:src="@drawable/ic_star"
             app:layout_constraintBottom_toBottomOf="@+id/repo_stars"
             app:layout_constraintEnd_toStartOf="@+id/repo_stars"
@@ -69,6 +71,7 @@
             android:id="@+id/repo_stars"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
             android:paddingVertical="@dimen/row_item_margin_vertical"
             android:text="@{repo.stargazersCount.toString()}"
             android:textSize="@dimen/repo_description_size"
@@ -77,6 +80,7 @@
             tools:text="30" />
 
         <ImageView
+            android:importantForAccessibility="no"
             android:id="@+id/forks"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
